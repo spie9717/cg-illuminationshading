@@ -159,8 +159,22 @@ class GlApp {
             //
             // TODO: properly select shader here
             //
-            let selected_shader = 'emissive';
+            let selected_shader = 'gouraud_color';
             this.gl.useProgram(this.shader[selected_shader].program);
+
+            if (selected_shader == 'gouraud_color') {
+                // Add Lighting Uniforms
+                this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_position, this.scene.light.point_lights[0].position)
+                this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_color, this.scene.light.point_lights[0].color)
+                this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_ambient, this.scene.light.ambient)
+    
+                // Add Material Uniforms
+                this.gl.uniform3fv(this.shader[selected_shader].uniforms.material_specular, this.scene.models[i].material.specular);
+                this.gl.uniform1f(this.shader[selected_shader].uniforms.material_shininess, this.scene.models[i].material.shininess);
+                
+                // Add Camera Uniforms
+                this.gl.uniform3fv(this.shader[selected_shader].uniforms.camera_position, this.scene.camera.position);
+            }
 
             // transform model to proper position, size, and orientation
             glMatrix.mat4.identity(this.model_matrix);
