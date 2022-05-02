@@ -14,7 +14,7 @@ out vec3 frag_normal;
 
 void main() {
     mat4 modelViewMatrix = view_matrix * model_matrix;
-    vec3 viewModelPosition = modelViewMatrix * vertex_position;
+    vec4 viewModelPosition = model_matrix * vec4(vertex_position, 1.0);
     frag_pos = viewModelPosition.xyz;
 
     mat3 normalMatrix = transpose(inverse(mat3(modelViewMatrix)));
