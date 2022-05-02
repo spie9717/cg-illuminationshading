@@ -159,10 +159,10 @@ class GlApp {
             //
             // TODO: properly select shader here
             //
-            let selected_shader = 'gouraud_color';
+            let selected_shader = this.algorithm + '_color';
             this.gl.useProgram(this.shader[selected_shader].program);
-
-            if (selected_shader == 'gouraud_color') {
+            console.log(this.algorithm);
+            //if (selected_shader == 'gouraud_color') {
                 // Add Lighting Uniforms
                 this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_position, this.scene.light.point_lights[0].position)
                 this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_color, this.scene.light.point_lights[0].color)
@@ -174,7 +174,7 @@ class GlApp {
                 
                 // Add Camera Uniforms
                 this.gl.uniform3fv(this.shader[selected_shader].uniforms.camera_position, this.scene.camera.position);
-            }
+            //}
 
             // transform model to proper position, size, and orientation
             glMatrix.mat4.identity(this.model_matrix);
