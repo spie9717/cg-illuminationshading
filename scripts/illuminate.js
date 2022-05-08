@@ -126,9 +126,6 @@ class GlApp {
         // create a texture, and upload a temporary 1px white RGBA array [255,255,255,255]
         let texture = this.gl.createTexture();
 
-        //
-        // TODO: set texture parameters and upload a temporary 1px white RGBA array [255,255,255,255]
-        // 
         this.gl.bindTexture(this.gl.TEXTURE_2D, texture)
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER,
@@ -153,9 +150,6 @@ class GlApp {
 
 
     updateTexture(texture, image_element) {
-        //
-        // TODO: update image for specified texture
-        //
         this.gl.bindTexture(this.gl.TEXTURE_2D, texture)
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.LINEAR);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER,
@@ -175,10 +169,7 @@ class GlApp {
         // draw all models
         for (let i = 0; i < this.scene.models.length; i ++) {
             if (this.vertex_array[this.scene.models[i].type] == null) continue;
-            
-            //
-            // TODO: properly select shader here
-            //
+
             let selected_shader = this.algorithm + '_' + this.scene.models[i].shader;
             this.gl.useProgram(this.shader[selected_shader].program);
 
@@ -214,10 +205,6 @@ class GlApp {
             this.gl.uniformMatrix4fv(this.shader[selected_shader].uniforms.projection_matrix, false, this.projection_matrix);
             this.gl.uniformMatrix4fv(this.shader[selected_shader].uniforms.view_matrix, false, this.view_matrix);
             this.gl.uniformMatrix4fv(this.shader[selected_shader].uniforms.model_matrix, false, this.model_matrix);
-            
-            //
-            // TODO: bind proper texture and set uniform (if shader is a textured one)
-            //
             
             if(this.scene.models[i].shader == "texture") {
                 // Add texture uniforms
