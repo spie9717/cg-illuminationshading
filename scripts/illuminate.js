@@ -165,30 +165,29 @@ class GlApp {
     render() {
         // delete previous frame (reset both framebuffer and z-buffer)
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-        
+        //for(let j = 0; j < this.scene.light.point_lights.length; j++) {
         // draw all models
         for (let i = 0; i < this.scene.models.length; i ++) {
             if (this.vertex_array[this.scene.models[i].type] == null) continue;
-
-            let selected_shader = this.algorithm + '_' + this.scene.models[i].shader;
-            this.gl.useProgram(this.shader[selected_shader].program);
-
-            console.log(this.algorithm);
-            //if (selected_shader == 'gouraud_color') {
-                // Add Lighting Uniforms
-                this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_position, this.scene.light.point_lights[0].position)
-                this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_color, this.scene.light.point_lights[0].color)
-                this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_ambient, this.scene.light.ambient)
-    
-                // Add Material Uniforms
-                this.gl.uniform3fv(this.shader[selected_shader].uniforms.material_specular, this.scene.models[i].material.specular);
-                this.gl.uniform1f(this.shader[selected_shader].uniforms.material_shininess, this.scene.models[i].material.shininess);
+                let selected_shader = this.algorithm + '_' + this.scene.models[i].shader;
                 
-                // Add Camera Uniforms
-                this.gl.uniform3fv(this.shader[selected_shader].uniforms.camera_position, this.scene.camera.position);
+                for(let j = 0; j < this.scene.light.point_lights.length; j++) {
+                    
+                    this.gl.useProgram(this.shader[selected_shader].program);
+                    
+                    // Add Lighting Uniforms
+                    this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_position, this.scene.light.point_lights[j].position)
+                    this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_color, this.scene.light.point_lights[j].color)
+                    this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_ambient, this.scene.light.ambient)
 
-            //}
-            
+                    // Add Material Uniforms
+                    this.gl.uniform3fv(this.shader[selected_shader].uniforms.material_specular, this.scene.models[i].material.specular);
+                    this.gl.uniform1f(this.shader[selected_shader].uniforms.material_shininess, this.scene.models[i].material.shininess);
+                
+                    // Add Camera Uniforms
+                    this.gl.uniform3fv(this.shader[selected_shader].uniforms.camera_position, this.scene.camera.position);
+                }
+
             if(this.scene.models[i].shader == "texture") {
                 this.gl.uniform2fv(this.shader[selected_shader].uniforms.texture_scale, this.scene.models[i].texture.scale)
             }
@@ -213,10 +212,13 @@ class GlApp {
                 this.gl.uniform1i(this.shader[selected_shader].uniforms.image, 0);
 
             }
+            
 
             this.gl.bindVertexArray(this.vertex_array[this.scene.models[i].type]);
             this.gl.drawElements(this.gl.TRIANGLES, this.vertex_array[this.scene.models[i].type].face_index_count, this.gl.UNSIGNED_SHORT, 0);
             this.gl.bindVertexArray(null);
+        
+        
         }
 
         // draw all light sources

@@ -45,7 +45,7 @@ function init() {
                         shader: 'texture',
                         texture: {
                             url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Textures_p1000449.jpg/1280px-Textures_p1000449.jpg",
-                            scale: [1,1]
+                            scale: [1,1]    
                         },
                         material: {
                             color: vec3.fromValues(1, 1, 1),  // red, green, blue
@@ -65,7 +65,52 @@ function init() {
                         {
                             position: vec3.fromValues(1.5, 3.0, -4.5),  // x, y, z
                             color: vec3.fromValues(1.0, 1.0, 0.8)  // red, green, blue
-                        }
+                        },
+
+                        {
+                            position: vec3.fromValues(1.0, 3.0, -4.5),  // x, y, z
+                            color: vec3.fromValues(1.0, 1.0, 0.8)  // red, green, blue
+                        },
+
+                        {
+                            position: vec3.fromValues(0.5, 3.0, -4.5),  // x, y, z
+                            color: vec3.fromValues(1.0, 1.0, 0.8)  // red, green, blue
+                        },
+
+                        {
+                            position: vec3.fromValues(0, 3.0, -4.5),  // x, y, z
+                            color: vec3.fromValues(1.0, 1.0, 0.8)  // red, green, blue
+                        },
+
+                        {
+                            position: vec3.fromValues(-0.5, 3.0, -4.5),  // x, y, z
+                            color: vec3.fromValues(1.0, 1.0, 0.8)  // red, green, blue
+                        },
+
+                        {
+                            position: vec3.fromValues(-1.0, 3.0, -4.5),  // x, y, z
+                            color: vec3.fromValues(1.0, 1.0, 0.8)  // red, green, blue
+                        },
+
+                        {
+                            position: vec3.fromValues(-1.5, 3.0, -4.5),  // x, y, z
+                            color: vec3.fromValues(1.0, 1.0, 0.8)  // red, green, blue
+                        },
+                        
+                        {
+                            position: vec3.fromValues(-2.0, 3.0, -4.5),  // x, y, z
+                            color: vec3.fromValues(1.0, 1.0, 0.8)  // red, green, blue
+                        },
+
+                        {
+                            position: vec3.fromValues(-2.5, 3.0, -4.5),  // x, y, z
+                            color: vec3.fromValues(1.0, 1.0, 0.8)  // red, green, blue
+                        },
+
+                        {
+                            position: vec3.fromValues(-3.0, 3.0, -4.5),  // x, y, z
+                            color: vec3.fromValues(1.0, 1.0, 0.8)  // red, green, blue
+                        },
                     ]
                 }
             }
