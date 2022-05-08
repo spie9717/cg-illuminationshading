@@ -61,7 +61,7 @@ class GlApp {
         this.shader.gouraud_color = this.createShaderProgram(shaders[0], shaders[1]);
         this.shader.gouraud_texture = this.createShaderProgram(shaders[2], shaders[3]);
         this.shader.phong_color = this.createShaderProgram(shaders[4], shaders[5]);
-        this.shader.phone_texture = this.createShaderProgram(shaders[6], shaders[7]);
+        this.shader.phong_texture = this.createShaderProgram(shaders[6], shaders[7]);
         this.shader.emissive = this.createShaderProgram(shaders[8], shaders[9]);
 
         this.initializeGlApp();
@@ -159,10 +159,11 @@ class GlApp {
             //
             // TODO: properly select shader here
             //
-            let selected_shader = 'gouraud_color';
+            let selected_shader = this.algorithm + '_color';
             this.gl.useProgram(this.shader[selected_shader].program);
 
-            if (selected_shader == 'gouraud_color' || selected_shader == 'gouraud_texture') {
+            console.log(this.algorithm);
+            //if (selected_shader == 'gouraud_color') {
                 // Add Lighting Uniforms
                 this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_position, this.scene.light.point_lights[0].position)
                 this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_color, this.scene.light.point_lights[0].color)
@@ -174,7 +175,7 @@ class GlApp {
                 
                 // Add Camera Uniforms
                 this.gl.uniform3fv(this.shader[selected_shader].uniforms.camera_position, this.scene.camera.position);
-            }
+            //}
 
             if (selected_shader == 'gouraud_texture') {
                 this.gl.sampler2d()
