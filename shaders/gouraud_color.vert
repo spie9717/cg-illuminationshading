@@ -17,7 +17,6 @@ uniform mat4 projection_matrix;
 out vec3 ambient;
 out vec3 diffuse;
 out vec3 specular;
-out vec3 world_vertex_normal;
 
 void main() {
     mat4 modelViewMatrix = view_matrix * model_matrix;
@@ -33,7 +32,6 @@ void main() {
     
     vec3 nN = normalize(normalMatrix * vertex_normal);
 
-    world_vertex_normal = nN;
     float diffuse_brightness = max(0.0, dot(nN, nL));
     diffuse = light_color * diffuse_brightness;
 
