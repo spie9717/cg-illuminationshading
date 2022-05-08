@@ -44,7 +44,7 @@ function init() {
                         type: 'cube',
                         shader: 'texture',
                         texture: {
-                            url: "https://pokkefe.github.io/img/profile.jpg",
+                            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Textures_p1000449.jpg/1280px-Textures_p1000449.jpg",
                             scale: [1,1]
                         },
                         material: {
@@ -54,8 +54,8 @@ function init() {
                         },
                         center: vec3.fromValues(0.0, 1.0, -10.0), // x, y, z
                         size: vec3.fromValues(2.0, 2.0, 2.0),  // width, height, depth
-                        rotate_x: 0,
-                        rotate_y: 0,
+                        rotate_x: 15,
+                        rotate_y: 15,
                         rotate_z: 0
                     },
                 ],

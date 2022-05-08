@@ -22,13 +22,16 @@ out vec3 specular;
 out vec2 frag_texcoord;
 
 void main() {
+    mat4 modelViewMatrix = view_matrix * model_matrix;
+    mat3 normalMatrix = transpose(inverse(mat3(modelViewMatrix)));
+
     // Ambient
     ambient = light_ambient;
 
     // Diffuse
     vec3 world_vertex_position = (model_matrix * vec4(vertex_position, 1.0)).xyz;
     vec3 nL = normalize(light_position - world_vertex_position);
-    vec3 nN = normalize(vertex_normal);
+    vec3 nN = normalize(normalMatrix * vertex_normal);
     float diffuse_brightness = max(0.0, dot(nN, nL));
     diffuse = light_color * diffuse_brightness;
 
