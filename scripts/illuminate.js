@@ -170,23 +170,28 @@ class GlApp {
         for (let i = 0; i < this.scene.models.length; i ++) {
             if (this.vertex_array[this.scene.models[i].type] == null) continue;
                 let selected_shader = this.algorithm + '_' + this.scene.models[i].shader;
-                
-                for(let j = 0; j < this.scene.light.point_lights.length; j++) {
-                    
-                    this.gl.useProgram(this.shader[selected_shader].program);
-                    
-                    // Add Lighting Uniforms
-                    this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_position, this.scene.light.point_lights[j].position)
-                    this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_color, this.scene.light.point_lights[j].color)
-                    this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_ambient, this.scene.light.ambient)
 
-                    // Add Material Uniforms
-                    this.gl.uniform3fv(this.shader[selected_shader].uniforms.material_specular, this.scene.models[i].material.specular);
-                    this.gl.uniform1f(this.shader[selected_shader].uniforms.material_shininess, this.scene.models[i].material.shininess);
+                this.gl.useProgram(this.shader[selected_shader].program);
                 
-                    // Add Camera Uniforms
-                    this.gl.uniform3fv(this.shader[selected_shader].uniforms.camera_position, this.scene.camera.position);
+                // Add Lighting Uniforms
+                this.gl.uniform1i(this.shader[selected_shader].uniforms.light_count, this.scene.light.point_lights.length)
+                for(let j = 0; j < this.scene.light.point_lights.length; j++) {
+
+                    let light_pos_uniform = this.gl.getUniformLocation(this.shader[selected_shader].program, `light_position[${j}]`)
+                    this.gl.uniform3fv(light_pos_uniform, this.scene.light.point_lights[j].position)
+                    
+                    let light_col_uniform = this.gl.getUniformLocation(this.shader[selected_shader].program, `light_color[${j}]`)
+                    this.gl.uniform3fv(light_col_uniform, this.scene.light.point_lights[j].color)
                 }
+                
+                this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_ambient, this.scene.light.ambient)
+
+                // Add Material Uniforms
+                this.gl.uniform3fv(this.shader[selected_shader].uniforms.material_specular, this.scene.models[i].material.specular);
+                this.gl.uniform1f(this.shader[selected_shader].uniforms.material_shininess, this.scene.models[i].material.shininess);
+            
+                // Add Camera Uniforms
+                this.gl.uniform3fv(this.shader[selected_shader].uniforms.camera_position, this.scene.camera.position);
 
             if(this.scene.models[i].shader == "texture") {
                 this.gl.uniform2fv(this.shader[selected_shader].uniforms.texture_scale, this.scene.models[i].texture.scale)
