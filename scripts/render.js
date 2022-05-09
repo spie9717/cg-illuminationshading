@@ -59,7 +59,7 @@ function init() {
                         shader: 'texture',
                         texture: {
                             url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Textures_p1000449.jpg/1280px-Textures_p1000449.jpg",
-                            scale: [1,1]    
+                            scale: [2,2]    
                         },
                         material: {
                             color: vec3.fromValues(1, 1, 1),  // red, green, blue

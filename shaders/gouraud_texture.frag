@@ -14,6 +14,6 @@ uniform sampler2D image;        // use in conjunction with Ka and Kd
 out vec4 FragColor;
 
 void main() {
-    vec4 tex_color = texture(image, frag_texcoord);
+    vec4 tex_color = texture(image, mod(frag_texcoord, 1.0));
     FragColor = vec4(((((ambient + diffuse) * material_color) + (specular * material_specular))), 1.0) * tex_color;
 }

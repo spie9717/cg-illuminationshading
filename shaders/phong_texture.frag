@@ -43,5 +43,5 @@ void main() {
     specular = clamp(specular, 0.0, 1.0);
     diffuse = clamp(diffuse, 0.0, 1.0);
 
-    FragColor = vec4(((((ambient + diffuse) * material_color) + (specular * material_specular))), 1.0) * texture(image, frag_texcoord);
+    FragColor = vec4(((((ambient + diffuse) * material_color) + (specular * material_specular))), 1.0) * texture(image, mod(frag_texcoord,1.0));
 }
